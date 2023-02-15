@@ -2,7 +2,7 @@ import React from "react";
 
 export const Banner = () => {
   return (
-    <div className="flex flex-col lg:flex-row lg:space-x-5 justify-between font-bold px-5 py-5 mb-10">
+    <div className="flex flex-col lg:flex-row lg:space-x-5 justify-between font-bold py-5 mb-10">
       <div className="">
         <h1 className="text-7xl">Vincent Thought</h1>
         <h2>Welcome to </h2>
