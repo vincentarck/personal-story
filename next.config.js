@@ -5,6 +5,6 @@ module.exports = {
     appDir:true
   },
   images:{
-    domains:["w1.pngwing.com", "play-lh.googleusercontent.com"]
+    domains:["w1.pngwing.com", "play-lh.googleusercontent.com", "cdn.sanity.io"]
   }
 }
