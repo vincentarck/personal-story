@@ -2,6 +2,8 @@ import { previewData } from "next/headers";
 import { groq } from "next-sanity";
 import { client } from "../../lib/sanity.client";
 import PreviewSuspense from "../../components/PreviewSuspense";
+import PreviewBlogList from "../../components/PreviewBlogList";
+import BlogList from "../../components/BlogList";
 
 // Piping by created
 const queryAllPosts = groq`
@@ -23,11 +25,11 @@ export default async function HomePage() {
           </div>
         }
       >
-        <PreviewBlogList />
+        <PreviewBlogList query={queryAllPosts} />
       </PreviewSuspense>
     );
 
   const posts = await client.fetch(queryAllPosts);
 
-  return <div>page</div>;
+  return <BlogList posts={posts}/>
 }
