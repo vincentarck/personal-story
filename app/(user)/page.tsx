@@ -7,7 +7,7 @@ import BlogList from "../../components/BlogList";
 
 // Piping by created
 const queryAllPosts = groq`
-*[type=='post']{
+*[_type=='post']{
   ...,
   author->,
   categories[]->
@@ -30,6 +30,6 @@ export default async function HomePage() {
     );
 
   const posts = await client.fetch(queryAllPosts);
-
+  console.log(posts)
   return <BlogList posts={posts}/>
 }
