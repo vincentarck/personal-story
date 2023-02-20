@@ -4,6 +4,8 @@ import { client } from "../../../../lib/sanity.client";
 import Image from "next/image";
 import urlFor from "../../../../lib/urlFor";
 import getLocaleDate from "../../../../lib/localeDate";
+import { PortableText } from "@portabletext/react";
+import { RichTextComponent } from "../../../../components/RichTextComponent";
 
 type Props = {
   params: {
@@ -21,7 +23,7 @@ export default async function Page({ params: { slug } }: Props) {
     `;
 
   const post: Post = await client.fetch(query, { slug });
-  const { _createdAt, author, categories, description, title, mainImage } = post;
+  const { _createdAt, author, categories, body, title, mainImage } = post;
   return (
     <article>
       <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/3 xl:w-3/5 relative h-80 sm:h-96 lg:h-[500px] xl:h-[600px] mx-auto">
@@ -48,6 +50,11 @@ export default async function Page({ params: { slug } }: Props) {
           </div>
         </div>
       </div>
+
+      <section className="px-20 py-12 text-[#e5e7eb]
+      ">
+      <PortableText value={body} components={RichTextComponent} />
+      </section>
     </article>
   );
 }
