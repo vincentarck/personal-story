@@ -11,7 +11,6 @@ export default function BlogList({ posts }: Props) {
   return (
     <div>
       <hr className="border-blue-200/70 mb-10" />
-
       <div className="px-0 sm:px-24 md:px-0 lg:px-24 2xl:px-32 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-x-12 gap-y-12">
         {posts.map((post) => (
           <ClientSideRoute 

@@ -30,6 +30,5 @@ export default async function HomePage() {
     );
 
   const posts = await client.fetch(queryAllPosts);
-  console.log(posts)
   return <BlogList posts={posts}/>
 }
