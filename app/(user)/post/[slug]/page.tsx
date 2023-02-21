@@ -23,12 +23,11 @@ export default async function Page({ params: { slug } }: Props) {
     `;
 
   const post: Post = await client.fetch(query, { slug });
-  const { _createdAt, author, categories, body, title, mainImage } = post;
   return (
     <article>
       <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/3 xl:w-3/5 relative h-80 sm:h-96 lg:h-[500px] xl:h-[600px] mx-auto">
         <Image
-          src={urlFor(mainImage).url()}
+          src={urlFor(post.mainImage).url()}
           className="object-cover object-center mx-auto"
           alt="profile"
           fill
@@ -36,9 +35,9 @@ export default async function Page({ params: { slug } }: Props) {
 
         <div className="absolute w-full right-[0px] bottom-[0px] bg-[#0e1217]/50 p-5 flex justify-between">
           <div className="max-w-[400px] xl:max-w-[550px]">
-            <h1 className="font-bold text-lg sm:text-xl md:text-2xl">{title}</h1>
+            <h1 className="font-bold text-lg sm:text-xl md:text-2xl">{post.title}</h1>
             <p className="font-bold text-yellow-50 text-sm">
-              {getLocaleDate(_createdAt, "en-US", {
+              {getLocaleDate(post._createdAt, "en-US", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",
@@ -46,14 +45,14 @@ export default async function Page({ params: { slug } }: Props) {
             </p>
           </div>
           <div className="hidden lg:flex gap-3 items-center">
-            {categories.map(ctgry => <p className="py-2 px-4 rounded-lg bg-blue-300 text-sm text-black font-medium">#{ctgry.title}</p>)}
+            {post.categories.map(ctgry => <p className="py-2 px-4 rounded-lg bg-blue-300 text-sm text-black font-medium">#{ctgry.title}</p>)}
           </div>
         </div>
       </div>
 
       <section className="px-20 py-12 text-[#e5e7eb]
       ">
-      <PortableText value={body} components={RichTextComponent} />
+      <PortableText value={post.body} components={RichTextComponent} />
       </section>
     </article>
   );
