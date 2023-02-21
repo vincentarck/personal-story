@@ -13,6 +13,20 @@ type Props = {
   };
 };
 
+export async function generateStaticParams(){
+  const query = groq`
+  *[_type == 'post']{
+    slug
+  }
+  `
+  const slugs: Post[] = await client.fetch(query);
+  const slugRoutes = slugs.map((slug) => slug.slug.current);
+
+  return slugRoutes.map(slug => ({
+    slug
+  }))
+}
+
 export default async function Page({ params: { slug } }: Props) {
   const query = groq`
     *[_type == 'post' && slug.current == $slug][0]{
