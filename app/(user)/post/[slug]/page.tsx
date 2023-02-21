@@ -13,6 +13,8 @@ type Props = {
   };
 };
 
+export const revalidate = 30; // Help to update all resources with static generated pages
+
 export async function generateStaticParams(){
   const query = groq`
   *[_type == 'post']{
@@ -64,7 +66,7 @@ export default async function Page({ params: { slug } }: Props) {
         </div>
       </div>
 
-      <section className="px-20 py-12 text-[#e5e7eb]
+      <section className="md:px-20 py-12 text-[#e5e7eb]
       ">
       <PortableText value={post.body} components={RichTextComponent} />
       </section>

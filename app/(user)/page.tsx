@@ -13,6 +13,10 @@ const queryAllPosts = groq`
   categories[]->
 } | order(_createdAt desc)
 `;
+
+
+export const revalidate = 30; // Help to update all resources with static generated pages
+
 export default async function HomePage() {
   if (previewData())
     return (
