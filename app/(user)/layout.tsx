@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className="text-white px-5 sm:px-10 bg-[#0e1217]">
+      <body className="text-white px-5 sm:px-10 bg-[#0e1217] mb-36">
         <Header />
         <Banner />
         {children}
