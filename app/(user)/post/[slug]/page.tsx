@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-export const revalidate = 30; // Help to update all resources with static generated pages
+export const revalidate = 5; // Help to update all resources with static generated pages
 
 const commentsQuery = groq`
     *[_type == 'comment' && references(*[_type == 'post' && _id == $postId]._id)]{

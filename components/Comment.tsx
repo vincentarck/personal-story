@@ -17,9 +17,8 @@ const query = groq`
     _id
 }
 `;
-export const revalidate = 5
+export const revalidate = 1;
 export const Comments = ({ comments, commentators }: any) => {
-  
   const [visible, setVisible] = useState(false);
 
   const [bodyComment, setBodyComment] = useState({
@@ -29,14 +28,14 @@ export const Comments = ({ comments, commentators }: any) => {
       ref: "",
     },
     desc: "",
-    _id:""
+    _id: "",
   });
   useEffect(() => {
     (async () => {
       const slug = window.location.pathname.split("/post/")[1];
-      if(!slug)return
+      if (!slug) return;
       const post: object = await client.fetch(query, { slug });
-      setBodyComment(prev => ({...prev, ...post}))
+      setBodyComment((prev) => ({ ...prev, ...post }));
     })();
   }, []);
 
@@ -45,7 +44,7 @@ export const Comments = ({ comments, commentators }: any) => {
     const { desc, avatar } = bodyComment;
     if (!desc.trim().length)
       return setShowErrorMsg("Yuk isi pikiran anda dulu");
-    if (avatar.placeholder === "Select an option")
+    if (avatar.placeholder === "Pilih profile kalian")
       return setShowErrorMsg("Masukin karakter pilihan yuk");
     const mutations = {
       mutations: [
@@ -87,12 +86,11 @@ export const Comments = ({ comments, commentators }: any) => {
             placeholder: "Select an option",
             ref: "",
           },
-          _id:""
+          _id: "",
         });
+        window.location.reload();
       })
       .catch((error) => console.error(error));
-
-    window.location.reload();
   };
 
   return (
@@ -161,12 +159,9 @@ export const Comments = ({ comments, commentators }: any) => {
                   setBodyComment((prev) => ({ ...prev, desc: e.target.value }))
                 }
               />
-              <label
-                htmlFor="floating_filled"
-                className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-[5] origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-              >
+              <p className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-[5] origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4">
                 Isi hati kalian
-              </label>
+              </p>
             </div>
             <div className="flex gap-5 self-end items-end">
               {showErrorMsg && (
@@ -193,9 +188,9 @@ export const Comments = ({ comments, commentators }: any) => {
                 className="rounded-full"
                 alt="profile"
               />
-              <h2 className="font-bold text-md text-white">
-                <div>
-                  {comment.person.personality}
+              <div className="font-bold text-md text-white">
+                <p>
+                  {comment.person.personality}{" "}
                   <span className="ml-4 text-sm text text-[#cccccc]">
                     {getLocaleDate(comment._createdAt, "en-US", {
                       day: "numeric",
@@ -203,11 +198,12 @@ export const Comments = ({ comments, commentators }: any) => {
                       year: "numeric",
                     })}
                   </span>
-                </div>
+                </p>
+
                 <p className="pt-2 text-[#cccccc] font-normal">
                   {comment.description}
                 </p>
-              </h2>
+              </div>
             </div>
           </div>
         ))}
