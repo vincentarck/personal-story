@@ -34,6 +34,7 @@ export const Comments = ({ comments, commentators }: any) => {
   useEffect(() => {
     (async () => {
       const slug = window.location.pathname.split("/post/")[1];
+      if(!slug)return
       const post: object = await client.fetch(query, { slug });
       setBodyComment(prev => ({...prev, ...post}))
     })();
