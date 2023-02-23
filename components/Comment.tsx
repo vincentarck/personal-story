@@ -17,8 +17,8 @@ const query = groq`
     _id
 }
 `;
-
-export const Comments = ({ postId, comments, commentators }: any) => {
+export const revalidate = 5
+export const Comments = ({ comments, commentators }: any) => {
   
   const [visible, setVisible] = useState(false);
 
