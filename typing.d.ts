@@ -62,3 +62,16 @@ interface Title {
   _type: string;
   current: string;
 }
+
+interface Comment extends Base {
+  blog: object;
+  person: Commentator;
+  popularity:object,
+  description:string
+}
+
+interface Commentator extends Base {
+  personality: string;
+  person: object;
+  profileImage:object
+}
