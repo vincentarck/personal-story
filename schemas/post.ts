@@ -48,7 +48,7 @@ export default defineType({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
-    }),
+    })
   ],
 
   preview: {
